@@ -52,36 +52,6 @@ RUN chown -R www-data:www-data ./storage ./bootstrap/cache
 
 
 
-# Install PHP
-RUN curl --silent --location https://lang-php.s3.amazonaws.com/dist-cedar-14-master/php-$PHP_VERSION.tar.gz | tar xz -C /app/.heroku/php
-# Config
-RUN mkdir -p /app/.heroku/php/etc/php/conf.d
-RUN curl --silent --location https://raw.githubusercontent.com/heroku/heroku-buildpack-php/5a770b914549cf2a897cbbaf379eb5adf410d464/conf/php/php.ini > /app/.heroku/php/etc/php/php.ini
-# Enable all optional exts
-RUN echo "\n\
-user_ini.cache_ttl = 30 \n\
-zend_extension = opcache.so \n\
-opcache.enable_cli = 1 \n\
-opcache.validate_timestamps = 1 \n\
-opcache.revalidate_freq = 0 \n\
-opcache.fast_shutdown = 0 \n\
-extension=bcmath.so \n\
-extension=calendar.so \n\
-extension=exif.so \n\
-extension=ftp.so \n\
-extension=gd.so \n\
-extension=gettext.so \n\
-extension=intl.so \n\
-extension=mbstring.so \n\
-extension=pcntl.so \n\
-extension=shmop.so \n\
-extension=soap.so \n\
-extension=sqlite3.so \n\
-extension=pdo_sqlite.so \n\
-extension=xmlrpc.so \n\
-extension=xsl.so\n\
-" >> /app/.heroku/php/etc/php/php.ini
-
 # Install Composer
 RUN curl --silent --location "https://lang-php.s3.amazonaws.com/dist-cedar-14-master/composer-1.0.0alpha11.tar.gz" | tar xz -C /app/.heroku/php
 
