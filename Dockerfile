@@ -12,12 +12,12 @@ COPY public ./public
 RUN npm run production
 
 # final nginx image
-FROM nginx:1.21.0-alpine
+FROM nginx:mainline
 
 WORKDIR /app
 
 COPY docker/nginx.default.conf /etc/nginx/conf.d/default.conf
-COPY --from=node /app/public /app/public
+COPY --from=node:14-alpine /app/public /app/public
 
 # Use the composer image to install the Laravel dependencies
 FROM composer AS composerStage
