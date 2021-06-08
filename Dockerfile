@@ -1,5 +1,5 @@
 # run laravel mix to compile assets
-FROM node
+FROM nginx:1.21.0-alpine
 
 WORKDIR /app
 COPY package.json package-lock.json ./
