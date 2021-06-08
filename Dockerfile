@@ -20,7 +20,7 @@ COPY docker/nginx.default.conf /etc/nginx/conf.d/default.conf
 COPY --from=node /app/public /app/public
 
 # Use the composer image to install the Laravel dependencies
-FROM composer AS composer
+FROM composer to composerStage
 
 WORKDIR /app
 
