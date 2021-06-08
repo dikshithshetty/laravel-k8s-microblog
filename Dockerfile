@@ -14,6 +14,8 @@ RUN npm run production
 # final nginx image
 FROM nginx:1.21.0-alpine
 
+WORKDIR /app
+
 COPY docker/nginx.default.conf /etc/nginx/conf.d/default.conf
 COPY --from=node /app/public /app/public
 
@@ -29,7 +31,6 @@ RUN composer install --prefer-dist --optimize-autoloader --ignore-platform-reqs 
 
 # PHP-FPM base image with dependencies
 FROM php:7.2-fpm-alpine
-
 RUN apk add --no-cache \
     build-base autoconf \
     openssl-dev \
