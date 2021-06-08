@@ -12,7 +12,7 @@ COPY public ./public
 RUN npm run production
 
 # final nginx image
-FROM nginx
+FROM nginx:1.21.0-alpine
 
 COPY docker/nginx.default.conf /etc/nginx/conf.d/default.conf
 COPY --from=node /app/public /app/public
