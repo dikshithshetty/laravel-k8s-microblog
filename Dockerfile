@@ -17,7 +17,7 @@ FROM nginx:mainline
 WORKDIR /app
 
 COPY docker/nginx.default.conf /etc/nginx/conf.d/default.conf
-COPY --from=node:14-alpine ./public /app/public
+COPY --from=node:14-alpine /kaniko/stages/node:14-alpine/app/public /app/public
 
 # Use the composer image to install the Laravel dependencies
 FROM composer AS composerStage
