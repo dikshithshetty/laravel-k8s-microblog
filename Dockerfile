@@ -17,7 +17,6 @@ FROM nginx:mainline
 WORKDIR /app
 
 COPY docker/nginx.default.conf /etc/nginx/conf.d/default.conf
-COPY /kaniko/stages/node:14-alpine/app/public /app/public
 
 # Use the composer image to install the Laravel dependencies
 FROM composer AS composerStage
@@ -46,7 +45,6 @@ RUN pecl install mcrypt-1.0.1 redis-5.2.0 \
 
 WORKDIR /app
 
-COPY --from=composer /app/vendor ./vendor
 COPY . .
 RUN mkdir -p ./storage/app ./storage/framework ./storage/logs ./bootstrap/cache ./storage/app/public ./storage/app ./storage/framework/cache ./storage/framework/cache/data ./storage/framework/testing ./storage/framework/sessions ./storage/framework ./storage/framework/views ./storage/logs
 RUN chown -R www-data:www-data ./storage ./bootstrap/cache
