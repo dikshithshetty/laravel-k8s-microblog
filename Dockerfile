@@ -17,7 +17,6 @@ FROM nginx:1.21.0-alpine
 WORKDIR /app
 
 COPY docker/nginx.default.conf /etc/nginx/conf.d/default.conf
-RUN nginx -s reload
 EXPOSE 80
 
 # Use the composer image to install the Laravel dependencies
